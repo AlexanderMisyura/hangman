@@ -9,6 +9,7 @@ import legOneSrc from '../assets/img/leg-one.png';
 import legTwoSrc from '../assets/img/leg-two.png';
 
 import getRandomQuestion from './questions';
+import createModal from './modal';
 
 let hangman;
 let wrapper;
@@ -152,23 +153,12 @@ export default function generatePage() {
   });
 
   return {
-    hangman,
-    wrapper,
     imageContainer,
-    gallows,
-    head,
-    hangBody,
-    handOne,
-    handTwo,
-    legOne,
-    legTwo,
-    quizContainer,
     answer,
-    hint,
-    guesses,
     counter,
     keyboard,
     alphabet,
     question,
+    ...createModal(),
   };
 }

@@ -8,28 +8,63 @@ let counter;
 let keyboard;
 let alphabet;
 let question;
+let modal;
+let modalBtn;
+let modalContent;
 
 function reGenerate() {
   pageElements = generatePage();
-  ({ imageContainer, answer, counter, keyboard, alphabet, question } =
-    pageElements);
+  ({
+    imageContainer,
+    answer,
+    counter,
+    keyboard,
+    alphabet,
+    question,
+    modal,
+    modalBtn,
+    modalContent,
+  } = pageElements);
 }
 reGenerate();
 
+let isWin;
+
+function fillModal() {
+  const secretWord = document.createElement('p');
+  secretWord.className = 'modal__message';
+  secretWord.innerText = `The answer was ${question.answer}`;
+  modalContent.prepend(secretWord);
+
+  const message = document.createElement('p');
+  if (isWin) {
+    message.className = 'modal__message modal__message_win';
+    message.innerText = 'Congratulations! You win!';
+  } else {
+    message.className = 'modal__message modal__message_lose';
+    message.innerText = 'Too bad. You lost(';
+  }
+  modalContent.prepend(message);
+}
+
+function startNewGame() {
+  document.body.innerHTML = '';
+  guesses = 0;
+  reGenerate();
+  // eslint-disable-next-line no-use-before-define
+  setListeners();
+}
+
 function checkWin() {
   const answerCells = [...answer.children];
-  const isWin = answerCells.every((answerCell) =>
+  isWin = answerCells.every((answerCell) =>
     answerCell.classList.contains('answer__cell_visible')
   );
   if (isWin) {
-    console.log('YOU WIN!');
-
-    document.body.innerHTML = '';
-    guesses = 0;
-    reGenerate();
-
     // eslint-disable-next-line no-use-before-define
-    setListeners();
+    removeListeners();
+    fillModal();
+    modal.style.display = 'block';
   }
 }
 
@@ -63,40 +98,44 @@ function checkGuess(guessedChar) {
     counter.innerText = `${guesses} / 6`;
 
     if (guesses >= 6) {
-      console.log('GAME OVER');
-      document.body.innerHTML = '';
-      guesses = 0;
-      reGenerate();
-
       // eslint-disable-next-line no-use-before-define
-      setListeners();
+      removeListeners();
+      fillModal();
+      modal.style.display = 'block';
     }
   }
 }
 
-function setListeners() {
-  function getClickedLetter(e) {
-    const button = e.target.closest('.key');
-    if (!button || button.disabled) return;
-    const { key } = button.dataset;
+function getClickedLetter(e) {
+  const button = e.target.closest('.key');
+  if (!button || button.disabled) return;
+  const { key } = button.dataset;
+  button.disabled = true;
+  checkGuess(key);
+}
+
+function getPressedLetter(e) {
+  const key = e.key.toUpperCase();
+
+  if (alphabet.includes(key)) {
+    const button = [...keyboard.querySelectorAll('.key')].find(
+      (btn) => btn.dataset.key === key
+    );
+    if (button.disabled) return;
     button.disabled = true;
     checkGuess(key);
   }
+}
+
+function setListeners() {
   keyboard.addEventListener('click', getClickedLetter);
-
-  function getPressedLetter(e) {
-    const key = e.key.toUpperCase();
-
-    if (alphabet.includes(key)) {
-      const button = [...keyboard.querySelectorAll('.key')].find(
-        (btn) => btn.dataset.key === key
-      );
-      if (button.disabled) return;
-      button.disabled = true;
-      checkGuess(key);
-    }
-  }
   document.addEventListener('keypress', getPressedLetter);
+  modalBtn.addEventListener('click', startNewGame);
+}
+
+function removeListeners() {
+  keyboard.removeEventListener('click', getClickedLetter);
+  document.removeEventListener('keypress', getPressedLetter);
 }
 
 setListeners();

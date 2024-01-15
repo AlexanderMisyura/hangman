@@ -1,0 +1,59 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $clr-modal-backdrop;
+
+  &__content {
+    background-color: $clr-text-key-light;
+    padding: 3rem;
+    max-width: 40rem;
+    width: 80%;
+    border-radius: 0.5rem;
+    box-shadow: $shadow;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__message {
+    font-size: 2.4rem;
+    &_win {
+      color: $clr-success;
+    }
+
+    &_lose {
+      color: $clr-alert-dark;
+    }
+  }
+
+  &__button {
+    background-color: $clr-key-primary;
+    color: $clr-text-key-light;
+    border-radius: 0.5rem;
+    box-shadow: $shadow;
+    padding: 1rem 2rem;
+    width: fit-content;
+
+    transition: $transition;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        cursor: pointer;
+        background-color: $clr-key-darker;
+      }
+    }
+  }
+}
