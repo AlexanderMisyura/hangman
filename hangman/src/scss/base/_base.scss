@@ -11,12 +11,10 @@ html {
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 4rem);
 }
-
-// TEMP
-// * {
-//   border: 1px solid red;
-// }
 
 .img {
   display: block;
