@@ -1,0 +1,44 @@
+.answer {
+  display: flex;
+  height: 4rem;
+  gap: 1rem;
+
+  @media (max-width: $tablet-width) {
+    gap: 0.7rem;
+  }
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 4rem;
+
+    font-size: 2.4rem;
+
+    @media (max-width: $custom-small-width) {
+      width: 3rem;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+
+      background-color: $clr-text;
+      border: 1px solid $clr-text;
+      border-radius: 3rem;
+    }
+
+    &_visible {
+      display: block;
+
+      &::after {
+        content: '';
+        display: none;
+      }
+    }
+  }
+}

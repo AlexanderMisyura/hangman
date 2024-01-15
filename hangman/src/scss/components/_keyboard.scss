@@ -1,0 +1,20 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__key-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    @media (max-width: $custom-mid-width) {
+      gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: $custom-mid-width) {
+    width: 100%;
+    gap: 0.7rem;
+  }
+}

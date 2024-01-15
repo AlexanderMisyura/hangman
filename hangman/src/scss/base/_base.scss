@@ -1,0 +1,25 @@
+html {
+  font-size: 62.5%;
+}
+
+.page {
+  margin: 2rem auto;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: $font-family;
+  color: $clr-text;
+
+  display: flex;
+  flex-direction: column;
+}
+
+// TEMP
+// * {
+//   border: 1px solid red;
+// }
+
+.img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}

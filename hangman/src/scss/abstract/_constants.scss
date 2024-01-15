@@ -1,0 +1,30 @@
+// Fonts
+$font-family: 'Lato', sans-serif;
+
+// Colors
+$clr-text: #292524;
+$clr-text-key-light: #ffffff;
+
+$clr-key-light: #7979af;
+$clr-key-primary: #5455ac;
+$clr-key-darker: #30328f;
+$clr-key-dark: #4547af;
+$clr-alert: #d42222;
+$clr-alert-dark: #941616;
+
+// Shadows
+$shadow:
+  0 4px 6px -1px rgba(0, 0, 0, 1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.4);
+
+// Animations
+$transition: all 0.3s ease-in;
+
+// Breakpoints
+$desktop-width: 1440px;
+$custom-large-width: 900px;
+$tablet-width: 768px;
+$custom-mid-width: 600px;
+$custom-small-width: 435px;
+$mobile-width: 380px;
